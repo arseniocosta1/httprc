@@ -264,9 +264,8 @@ func (q *queue) fetchAndStore(ctx context.Context, e *entry) error {
 			e.lastFetch = time.Time{}
 			q.enqueueNextFetch(nil, e)
 			panic(r)
-		} else {
-			q.enqueueNextFetch(res, e)
 		}
+		q.enqueueNextFetch(res, e)
 	}()
 
 	data, err := e.transform.Transform(e.request.url, res)
